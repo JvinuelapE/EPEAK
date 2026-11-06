@@ -1,0 +1,43 @@
+# ---------------------------------------------------------------- Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# virtual environments (dev and .exe build)
+.venv/
+venv/
+.build-venv/
+
+# ---------------------------------------------------------------- PyInstaller
+# root-level only: a plain "dist/" would also hide frontend/dist
+/build/
+/dist/
+# packaging/epeak.spec is source and must stay committed
+
+# ---------------------------------------------------------------- frontend
+frontend/node_modules/
+# built interface; run.py / `npm run build` regenerates it
+frontend/dist/
+frontend/.dist-backup/
+
+# ---------------------------------------------------------------- E-PEAK data
+# local data when running from source: logs, workspaces, autosaves, evidence
+epeak_data/
+*.epeak
+*.pkl
+epeak.log
+
+# test logs are often confidential; uncomment to keep all CSVs out of the repo
+# *.csv
+
+# ---------------------------------------------------------------- editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+.env
