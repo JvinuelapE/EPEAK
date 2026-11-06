@@ -15,6 +15,7 @@ import {
   CursorClip, DropClip, FilterClip, HowFigure, RemovePointsClip, ReorderClip, ReportClip, SchematicClip, ScreenMap,
   ToolCards, ToolHead, ZoomClip,
 } from "./art";
+import { CURRENT_VERSION, RELEASES, ReleaseNotes } from "./changelog";
 import { B, ButtonTable, Go, K, ShowMe, Tip, type BtnRow } from "./kit";
 
 export interface Section {
@@ -512,40 +513,11 @@ export const SECTIONS: Section[] = [
     </>),
   },
   {
-    id: "changes", group: "Background", title: "What's new in 2.0", icon: LuHistory,
-    keywords: "changes release notes version new",
+    id: "changes", group: "Background", title: "Version history", icon: LuHistory,
+    keywords: "what's new changes release notes version history update changelog",
     body: (<>
-      <p>Version 2.0 is a rebuild: a FastAPI backend with a React interface. Every v1 feature is kept.</p>
-      <h4>Speed and scale</h4>
-      <ul>
-        <li>Logs are parsed once and cached; nothing re-reads CSV on each interaction.</li>
-        <li>Plots, tables and statistics fetch only what's visible, so multi-million-row logs stay responsive.</li>
-        <li>No more "Process" buttons: tools update as you configure them.</li>
-      </ul>
-      <h4>Interface</h4>
-      <ul>
-        <li>Drag to reorder tabs and plots, rename tabs inline, duplicate tabs.</li>
-        <li>Unlimited plots per 2D tab (was 10) and up to ten logs in calibration, time sync and append (was 5), with linked X zoom.</li>
-        <li>Measurement readouts and marker toggles directly under each plot; resizable plots.</li>
-        <li>Cursors, limits with pass/fail, event detection, steady states and the oscillation finder.</li>
-        <li>Undo/redo for configuration, command palette, keyboard shortcuts, dark theme, global drag and drop.</li>
-        <li>Style changes apply live, add line width and drawing mode, and are now consistent everywhere (point removal no longer drops custom styles).</li>
-        <li>A tutorial with demo logs and guided tours, and this guide with pictures, short clips, search and “Show me” tours.</li>
-      </ul>
-      <h4>Data safety</h4>
-      <ul>
-        <li>The session is persisted continuously; a server restart or browser refresh no longer loses work (the old "amnesia" problem).</li>
-        <li>Workspaces are portable .epeak files instead of pickles; old .pkl files are converted on open.</li>
-        <li>The math engine no longer uses <code>eval</code>.</li>
-        <li>Logs are referenced by ID, so renaming a log doesn't break tabs that use it.</li>
-      </ul>
-      <h4>Fixes</h4>
-      <ul>
-        <li>The waveform link to a 2D plot tab now follows that tab's log reliably.</li>
-        <li>PicoLog files with a blank first header cell are read correctly.</li>
-        <li>Markers, point removals and zoom ranges are saved with the workspace.</li>
-        <li>Waveform peaks use each shape's true crest factor, so the RMS you enter is the RMS drawn.</li>
-      </ul>
+      <p>What changed in each version of E-PEAK, newest first. You're using version {CURRENT_VERSION}.</p>
+      {RELEASES.map((r, i) => <ReleaseNotes key={r.version} release={r} current={i === 0} />)}
     </>),
   },
 ];

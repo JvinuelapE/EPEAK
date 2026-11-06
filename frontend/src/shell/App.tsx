@@ -14,6 +14,7 @@ import { LogEditorView } from "../views/LogEditor";
 import { ReportStudioView } from "../views/ReportStudio";
 import { guardDirty, newWorkspace, pickAndUpload, pickWorkspaceFile, quit, saveWorkspace, uploadLogs, addEvidence } from "./actions";
 import { Docs } from "./Docs";
+import { CURRENT_VERSION } from "./docs/changelog";
 import { HowModal } from "./HowItWorks";
 import { LibraryDrawer } from "./LibraryDrawer";
 import { LimitsManager } from "./LimitsManager";
@@ -97,7 +98,7 @@ function TopBar() {
       { label: "Create tutorial shortcut on desktop", icon: <LuMonitorDown size={15} />, onSelect: createTutorialShortcut },
     ]),
     { separator: true },
-    { label: "What's new in 2.0", icon: <LuHistory size={15} />, onSelect: () => openModal({ kind: "docs", section: "changes" }) },
+    { label: `What's new in ${CURRENT_VERSION}`, icon: <LuHistory size={15} />, onSelect: () => openModal({ kind: "docs", section: "changes" }) },
     { label: "Command palette", icon: <LuCommand size={15} />, shortcut: "Ctrl+K", onSelect: () => openModal({ kind: "palette" }) },
   ];
   return (

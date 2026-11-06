@@ -5,6 +5,7 @@ import { Fragment, isValidElement, useEffect, useMemo, useRef, useState, type Re
 import { LuChevronLeft, LuChevronRight, LuSearch, LuX } from "react-icons/lu";
 import { Modal, cx } from "../components/ui";
 import { closeModal, getState } from "../store";
+import { CURRENT_VERSION } from "./docs/changelog";
 import { GuideNav, ShowMe } from "./docs/kit";
 import { GROUPS, SECTIONS, type Section } from "./docs/sections";
 import "./docs/docs.css";
@@ -31,6 +32,7 @@ function textOf(n: unknown): string {
   if (isValidElement(n)) {
     return Object.entries(n.props as Record<string, unknown>).filter(([k]) => !SKIP_PROPS.has(k)).map(([, v]) => textOf(v)).join(" ");
   }
+  if (typeof n === "object") return Object.values(n as Record<string, unknown>).map(textOf).join(" "); // data passed as props (release notes)
   return "";
 }
 
@@ -157,6 +159,9 @@ export function Docs({ section }: { section?: string }) {
                 </Fragment>
               ))}
             </nav>
+            <button type="button" className="guide-version" onClick={() => { setQ(""); setCur("changes"); }} title="Version history">
+              E-PEAK {CURRENT_VERSION} · What's new
+            </button>
           </aside>
           <article ref={article} className="guide-article">
             <header className="guide-head">
